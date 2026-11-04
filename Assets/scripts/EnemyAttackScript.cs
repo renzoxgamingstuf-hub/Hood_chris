@@ -6,6 +6,9 @@ public class EnemyAttackScript : MonoBehaviour
     public GameObject EnemyLeftHand;
     public GameObject EnemyRightHand;
 
+    private PunchHitbox leftHandHitbox;
+    private PunchHitbox rightHandHitbox;
+
     public int punchCooldown = 0;
 
     [Header("Enemy Combat Settings")]
@@ -17,7 +20,7 @@ public class EnemyAttackScript : MonoBehaviour
 
     private float stateTimer = 0f;
     private float idleAggressionTimer = 0f;
-    private int pendingPunchType = 0;
+    private int pendingPunchType = 1;
 
     private const float PUNCH_ANIMATION_LENGTH = 1.967f;
     private const float WINDUP_TIME = 0.25f;
@@ -29,6 +32,11 @@ public class EnemyAttackScript : MonoBehaviour
         {
             enemyLeaning = GetComponentInChildren<EnemyLeaning>();
         }
+
+        if (EnemyLeftHand != null) leftHandHitbox = EnemyLeftHand.GetComponent<PunchHitbox>();
+        if (EnemyRightHand != null) rightHandHitbox = EnemyRightHand.GetComponent<PunchHitbox>();
+
+        DisableAllHitboxes();
         ResetAggressionTimer();
     }
 
@@ -45,7 +53,7 @@ public class EnemyAttackScript : MonoBehaviour
                 idleAggressionTimer -= Time.deltaTime;
                 if (idleAggressionTimer <= 0f && punchCooldown <= 0)
                 {
-                    pendingPunchType = Random.Range(1, 3);
+                    pendingPunchType = Random.Range(1, 5);
                     currentState = EnemyState.WindingUp;
                     stateTimer = WINDUP_TIME;
                 }
@@ -63,6 +71,7 @@ public class EnemyAttackScript : MonoBehaviour
                 stateTimer -= Time.deltaTime;
                 if (stateTimer <= 0f)
                 {
+                    DisableAllHitboxes();
                     currentState = EnemyState.Idle;
                     ResetAggressionTimer();
                 }
@@ -96,18 +105,35 @@ public class EnemyAttackScript : MonoBehaviour
         stateTimer = PUNCH_ANIMATION_LENGTH;
         punchCooldown = 90;
 
-        if (punchType == 2)
+        bool isLeftHand = (punchType == 1 || punchType == 3);
+
+        if (EnemyLeftHand != null) EnemyLeftHand.SetActive(isLeftHand);
+        if (EnemyRightHand != null) EnemyRightHand.SetActive(!isLeftHand);
+
+        PunchHitbox activeHitbox = isLeftHand ? leftHandHitbox : rightHandHitbox;
+        if (activeHitbox != null) activeHitbox.ResetHit();
+
+        switch (punchType)
         {
-            animator.SetTrigger("CPunchR");
-            EnemyLeftHand.SetActive(false);
-            EnemyRightHand.SetActive(true);
+            case 1:
+                animator.SetTrigger("JabL"); 
+                break;
+            case 2:
+                animator.SetTrigger("JabR"); 
+                break;
+            case 3:
+                animator.SetTrigger("CPunchL"); 
+                break;
+            case 4:
+                animator.SetTrigger("CPunchR"); 
+                break;
         }
-        else if (punchType == 1)
-        {
-            animator.SetTrigger("CPunchL");
-            EnemyRightHand.SetActive(false);
-            EnemyLeftHand.SetActive(true);
-        }
+    }
+
+    public void DisableAllHitboxes()
+    {
+        if (EnemyLeftHand != null) EnemyLeftHand.SetActive(false);
+        if (EnemyRightHand != null) EnemyRightHand.SetActive(false);
     }
 
     private void ResetAggressionTimer()
@@ -122,6 +148,7 @@ public class EnemyAttackScript : MonoBehaviour
 
         if (currentState == EnemyState.WindingUp)
         {
+            DisableAllHitboxes();
             currentState = EnemyState.Idle;
             ResetAggressionTimer();
             return;
@@ -132,14 +159,15 @@ public class EnemyAttackScript : MonoBehaviour
         {
             currentState = EnemyState.Dodging;
             stateTimer = PUNCH_ANIMATION_LENGTH * 0.7f;
+            DisableAllHitboxes();
 
             if (playerPunchSide == "Right")
             {
-                if (enemyLeaning != null) enemyLeaning.SetLeanInput(-1f); // Dodge Left
+                if (enemyLeaning != null) enemyLeaning.SetLeanInput(1f);
             }
             else if (playerPunchSide == "Left")
             {
-                if (enemyLeaning != null) enemyLeaning.SetLeanInput(1f);  // Dodge Right
+                if (enemyLeaning != null) enemyLeaning.SetLeanInput(-1f);
             }
         }
     }

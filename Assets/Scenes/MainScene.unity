@@ -322,6 +322,7 @@ MonoBehaviour:
   leanAngle: 15
   dodgeDuration: 0.8
   dodgeCooldown: 0.4
+  playerCollider: {fileID: 0}
   attackScript: {fileID: 0}
 --- !u!1 &737690208 stripped
 GameObject:
@@ -361,7 +362,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9eaaf1f2fd641a442b8656609d7cd362, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PunchHitbox
-  damage: 10
+  isPlayerHitbox: 1
+  playerDamage: 20
+  enemyDamage: 5
   targetTag: Player
   hitCooldown: 0.5
 --- !u!1 &1036636756 stripped
@@ -598,8 +601,9 @@ MonoBehaviour:
   leanSpeed: 5
   leanAngle: 15
   dodgeDuration: 0.8
-  dodgeCooldown: 0.4
-  attackScript: {fileID: 0}
+  dodgeCooldown: 0
+  playerCollider: {fileID: 1193814110}
+  attackScript: {fileID: 2090069094}
 --- !u!136 &1193814110
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -826,7 +830,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9eaaf1f2fd641a442b8656609d7cd362, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PunchHitbox
-  damage: 10
+  isPlayerHitbox: 1
+  playerDamage: 10
+  enemyDamage: 5
   targetTag: Enemy
   hitCooldown: 0.5
 --- !u!1001 &1365900037
@@ -1095,7 +1101,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9eaaf1f2fd641a442b8656609d7cd362, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PunchHitbox
-  damage: 10
+  isPlayerHitbox: 1
+  playerDamage: 10
+  enemyDamage: 5
   targetTag: Enemy
   hitCooldown: 0.5
 --- !u!1 &2018348335 stripped
@@ -1136,7 +1144,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9eaaf1f2fd641a442b8656609d7cd362, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PunchHitbox
-  damage: 10
+  isPlayerHitbox: 1
+  playerDamage: 20
+  enemyDamage: 5
   targetTag: Player
   hitCooldown: 0.5
 --- !u!1 &2090069091 stripped

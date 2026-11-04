@@ -22,19 +22,21 @@ public class AttackScript : MonoBehaviour
 
     void Start()
     {
-        animator = GetComponent<Animator>();
-        
-        if (enemyAI == null)
-        {
-            enemyAI = FindAnyObjectByType<EnemyAttackScript>();
-        }
-        if (playerLeaning == null)
-        {
-            playerLeaning = GetComponentInChildren<PlayerLeaning>();
-        }
+    animator = GetComponent<Animator>();
+    
+    if (enemyAI == null)
+    {
+        enemyAI = FindAnyObjectByType<EnemyAttackScript>();
+    }
+    
 
-        if (LeftHand != null) leftHandHitbox = LeftHand.GetComponent<PunchHitbox>();
-        if (RightHand != null) rightHandHitbox = RightHand.GetComponent<PunchHitbox>();
+    if (playerLeaning == null)
+    {
+        playerLeaning = GetComponentInChildren<PlayerLeaning>() ?? GetComponentInParent<PlayerLeaning>();
+    }
+
+    if (LeftHand != null) leftHandHitbox = LeftHand.GetComponent<PunchHitbox>();
+    if (RightHand != null) rightHandHitbox = RightHand.GetComponent<PunchHitbox>();
     }
 
     void Update()
@@ -51,6 +53,8 @@ public class AttackScript : MonoBehaviour
         {
             if (Mouse.current != null && Mouse.current.leftButton.wasPressedThisFrame && cooldown <= 0)
             {
+                if (playerLeaning != null) playerLeaning.NotifyAttackStarted();
+
                 animator.SetTrigger("CPunchL");
                 LeftHand.SetActive(true);
                 RightHand.SetActive(false);
@@ -67,6 +71,8 @@ public class AttackScript : MonoBehaviour
             }
             else if (Mouse.current != null && Mouse.current.rightButton.wasPressedThisFrame && cooldown <= 0)
             {
+                if (playerLeaning != null) playerLeaning.NotifyAttackStarted();
+
                 animator.SetTrigger("CPunchR");
                 RightHand.SetActive(true);
                 LeftHand.SetActive(false);

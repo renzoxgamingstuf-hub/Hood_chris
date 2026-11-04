@@ -2,8 +2,12 @@ using UnityEngine;
 
 public class PunchHitbox : MonoBehaviour
 {
+    [Header("Hitbox Ownership")]
+    public bool isPlayerHitbox = true;
+
     [Header("Damage Settings")]
-    public float damage = 10f;
+    public float playerDamage = 10f;
+    public float enemyDamage = 5f;
     public string targetTag = "Enemy";
 
     [Header("Hit Cooldown")]
@@ -35,7 +39,8 @@ public class PunchHitbox : MonoBehaviour
 
             if (targetHealth != null)
             {
-                targetHealth.TakeDamage(damage);
+                float damageToDeal = isPlayerHitbox ? playerDamage : enemyDamage;
+                targetHealth.TakeDamage(damageToDeal);
                 cooldownTimer = hitCooldown;
             }
         }
