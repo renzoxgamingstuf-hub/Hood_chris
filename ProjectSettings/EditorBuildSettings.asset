@@ -5,8 +5,26 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
-    path: Assets/Scenes/SampleScene.unity
-    guid: 99c9720ab356a0642a771bea13969a05
+  - enabled: 1
+    path: Assets/Scenes/ApartmentScenes/Appartment.unity
+    guid: d8c2597569073ba48a98bd776e046afc
+  - enabled: 1
+    path: Assets/Scenes/ApartmentScenes/Appartment 1.unity
+    guid: 147cc420193995a44a6bc33dbcee4a62
+  - enabled: 1
+    path: Assets/Scenes/ApartmentScenes/Appartment 2.unity
+    guid: bc7e3e1285b62cf4db7c5d29459f1550
+  - enabled: 1
+    path: Assets/Scenes/ApartmentScenes/Appartment 3.unity
+    guid: 44a48682a00938640817d8ac44e78c89
+  - enabled: 1
+    path: Assets/Scenes/ApartmentScenes/Appartment 4.unity
+    guid: 8ad354984beeeb44597489244432106c
+  - enabled: 1
+    path: Assets/Scenes/ApartmentScenes/Appartment 5.unity
+    guid: bf5c3b9eec15f2145996d3391896fde1
+  - enabled: 1
+    path: Assets/Scenes/EnemySelectMenu.unity
+    guid: dae3834f4d192064ebaf18d6c377c74d
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}

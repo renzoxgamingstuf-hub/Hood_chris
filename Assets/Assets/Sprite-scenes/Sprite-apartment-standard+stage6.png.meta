@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: b853141ce88a4264395f023eafa839f1
+guid: 69cd290fbe8874141a4c8534220370c6
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -3991091895109164949
-    second: Sprite-apartment-standard+stage3_0
+      213: 8205869624516220488
+    second: Sprite-apartment-standard+stage6_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -102,7 +102,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Sprite-apartment-standard+stage3_0
+      name: Sprite-apartment-standard+stage6_0
       rect:
         serializedVersion: 2
         x: 0
@@ -117,8 +117,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: b60e31e211bcc98c0800000000000000
-      internalID: -3991091895109164949
+      spriteID: 846157a62fa11e170800000000000000
+      internalID: 8205869624516220488
       vertices: []
       indices: 
       edges: []
@@ -137,7 +137,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Sprite-apartment-standard+stage3_0: -3991091895109164949
+      Sprite-apartment-standard+stage6_0: 8205869624516220488
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
