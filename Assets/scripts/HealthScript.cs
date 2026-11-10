@@ -28,10 +28,16 @@ public class HealthScript : MonoBehaviour
         }
     }
 
-    void Die()
+   void Die()
     {
         string characterName = isPlayer ? "Player" : "Enemy";
         Debug.Log($"*** {characterName} HAS BEEN KNOCKED OUT! ***");
+
+        MatchManager matchManager = FindAnyObjectByType<MatchManager>();
+        if (matchManager != null)
+        {
+            matchManager.OnCharacterDied(isPlayer);
+        }
 
         if (!isPlayer)
         {

@@ -30,5 +30,9 @@ public class ChangeScenes : MonoBehaviour
     {
         SceneManager.LoadScene("EnemySelectMenu");
     }
+     public void GoToActualFight()
+    {
+        SceneManager.LoadScene("MainScene");
+    }
 }
 
