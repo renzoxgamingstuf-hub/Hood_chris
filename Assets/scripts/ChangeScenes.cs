@@ -28,6 +28,7 @@ public class ChangeScenes : MonoBehaviour
     }
     public void GoToFight()
     {
+        GameData.SetCurrentApartmentSceneName(SceneManager.GetActiveScene().name);
         SceneManager.LoadScene("EnemySelectMenu");
     }
      public void GoToActualFight()

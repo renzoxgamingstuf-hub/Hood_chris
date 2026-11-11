@@ -2,6 +2,8 @@ using UnityEngine;
 
 public static class GameData
 {
+    private const string LastApartmentScene = "CurrentApartmentScene";
+
     public static float Money
     {
         get => PlayerPrefs.GetFloat("PlayerMoney", 0f);
@@ -34,6 +36,11 @@ public static class GameData
     
     public static string GetCurrentApartmentSceneName()
     {
+        if (PlayerPrefs.HasKey(LastApartmentScene))
+        {
+            return PlayerPrefs.GetString(LastApartmentScene);
+        }
+
         if (ApartmentLevel <= 0)
         {
             return "Appartment";
@@ -42,11 +49,18 @@ public static class GameData
         return "Appartment " + ApartmentLevel;
     }
 
+    public static void SetCurrentApartmentSceneName(string sceneName)
+    {
+        PlayerPrefs.SetString(LastApartmentScene, sceneName);
+        PlayerPrefs.Save();
+    }
+
     public static void ResetProgress()
     {
         PlayerPrefs.DeleteKey("PlayerMoney");
         PlayerPrefs.DeleteKey("CurrentDay");
         PlayerPrefs.DeleteKey("ApartmentLevel");
+        PlayerPrefs.DeleteKey(LastApartmentScene);
         PlayerPrefs.Save();
     }
 }
